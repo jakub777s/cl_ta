@@ -12,6 +12,7 @@ import logging
 class ToDoListApp():
 
     def __init__(self):
+        self.gecko_path = "/snap/bin/geckodriver"
         self.web_address = "https://wc-react-todo-app.netlify.app/"
         self.loading_timeout = 10
         self.driver = self.create_connection()
@@ -38,7 +39,7 @@ class ToDoListApp():
         logging.basicConfig(level=logging.INFO)
 
     def create_connection(self):
-        driver = Firefox(service=Service(executable_path="/snap/bin/geckodriver"))
+        driver = Firefox(service=Service(executable_path=self.gecko_path))
         if driver.service.is_connectable() is not True:
             raise ConnectionError("Connection with browser was not established")
         return driver
